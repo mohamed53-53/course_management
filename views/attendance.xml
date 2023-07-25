@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="attendance_view_form" model="ir.ui.view">
+        <field name="name">attendance.form</field>
+        <field name="model">attendance</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="date"/>
+                        </group>
+                        <group>
+                            <field name="courses_id"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Students" name="Students">
+                            <field name="student_ids" widget="section_and_note_one2many">
+                                <form>
+                                    <field name="student_id"/>
+                                </form>
+                                <tree>
+                                    <field name="student_id"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" groups="base.group_user"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+    <record id="attendance_view_tree" model="ir.ui.view">
+        <field name="name">attendance.tree</field>
+        <field name="model">attendance</field>
+        <field name="arch" type="xml">
+
+            <tree>
+                <field name="courses_id"/>
+                <field name="date"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="attendance_action" model="ir.actions.act_window">
+        <field name="name">attendance</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">attendance</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new attendance!
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_attendance"
+              name="Attendance"
+              parent="menu_course_management"
+              action="attendance_action"
+              sequence="20"
+              groups="course_management.group_manager"
+    />
+</odoo>
+

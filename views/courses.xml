@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="courses_view_form" model="ir.ui.view">
+        <field name="name">courses.form</field>
+        <field name="model">courses</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="instructor_id"/>
+                            <field name="start_date"/>
+                            <field name="end_date"/>
+                        </group>
+                        <group>
+                            <field name="duration_per_day"/>
+                            <field name="course_content"/>
+                            <field name="course_capacity"/>
+                            <field name="available_seats"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Students" name="Students">
+                            <field name="student_ids" widget="section_and_note_one2many">
+                                <form>
+                                    <field name="student_id"/>
+                                </form>
+                                <tree>
+                                    <field name="student_id"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" groups="base.group_user"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+    <record id="courses_view_tree" model="ir.ui.view">
+        <field name="name">courses.tree</field>
+        <field name="model">courses</field>
+        <field name="arch" type="xml">
+
+            <tree>
+                <field name="name"/>
+                <field name="start_date"/>
+                <field name="end_date"/>
+                <field name="duration_per_day"/>
+                <field name="course_content"/>
+                <field name="course_capacity"/>
+                <field name="available_seats"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="courses_action" model="ir.actions.act_window">
+        <field name="name">courses</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">courses</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new course!
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_courses"
+              name="courses"
+              parent="menu_course_management"
+              action="courses_action"
+              sequence="20"
+              groups="course_management.group_manager"/>
+</odoo>
+
